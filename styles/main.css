@@ -1,6 +1,223 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 🔥 Fade-in Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Body */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff5722;
+  margin-bottom: 0.5rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Search & Cart */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-bar {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cart-icon {
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.cart-count {
+  background-color: red;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  background: url('https://as2.ftcdn.net/v2/jpg/05/66/75/33/1000_F_566753365_1Yxvbl58mPqg64OADY6AMyYDy0iqn1dV.jpg') center/cover no-repeat;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  padding: 1rem;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+   background: rgba(0, 0, 0, 0.6); 
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+/* ✨ Fade-in animation */
+.hero-content h1,
+.hero-content p,
+.hero-content .btn {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.hero-content p {
+  animation-delay: 0.3s;
+}
+
+.hero-content .btn {
+  animation-delay: 0.6s;
+}
+
+/* Hero Text */
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+/* CTA Button */
+.btn {
+  background-color: #ff5722;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #e64a19;
+  transform: scale(1.05);
+}
+
+/* Product Section */
+#products {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+#products h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#products p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* ✅ Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    background-color: #fff;
+    padding: 1rem 2rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+  }
 }
