@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Denim Jacket",
+    "price": "$49.99",
+    "image": "https://www.wrangler.in/blogs/_next/image?url=https%3A%2F%2Fd3lno48y6gvr4b.cloudfront.net%2Fwranglerprod%2Flandingpages%2F1718773647948.webp&w=3840&q=75"
+  },
+  {
+    "name": "White Sneakers",
+    "price": "$59.99",
+    "image": "https://fausto.in/cdn/shop/files/FSTKI-696WHITE_MoodShot_1_400x.jpg?v=1716974279"
+  },
+  {
+    "name": "Vintage T-Shirt",
+    "price": "$25.99",
+    "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTN30ecl08Me7ocWjsMLJGruzHK3Weh7ODiPmvFCM0A2bIakLJ9Q8tAKLXJQVWc5iOxZAYhUMR7fWCv8VPDosdtumiZ_6Kn1zvYdEUIezxm"
+  },
+  {
+    "name": "Trendy Sunglasses",
+    "price": "$19.99",
+    "image": "https://images-cdn.ubuy.co.in/6691e088a18b115a1143fc1c-hexagon-sunglasses-men-womens-trendy.jpg"
+  }
+]
