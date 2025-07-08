@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <!-- ✅ Same Header as index.html -->
+  <header>
+    <div class="logo">ShopMate</div>
+    <nav class="navbar">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <input type="text" placeholder="Search products..." class="search-bar" />
+        <div class="cart-icon">🛒<span class="cart-count">2</span></div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ✅ Product Detail Section -->
+  <section class="product-detail">
+    <div class="product-container">
+     <div class="product-image">
+  <img id="product-img" src="" alt="Product Image" />
+  <!-- Optional extra thumbnails -->
+  <div class="product-thumbnails" id="product-thumbnails">
+    <!-- Add thumbnails here if more images are added -->
+  </div>
+  <!-- Product variations -->
+<div class="product-options">
+  <div class="product-info">
+  <h1 id="product-name">Loading...</h1>
+  <p id="product-description"></p>
+
+  <!-- ✅ Size Dropdown -->
+  <label for="size">Size:</label>
+  <select id="size">
+    <option value="S">Small</option>
+    <option value="M" selected>Medium</option>
+    <option value="L">Large</option>
+    <option value="XL" disabled>XL (Out of Stock)</option>
+  </select>
+
+  <!-- ✅ Color Dropdown -->
+  <label for="color">Color:</label>
+  <select id="color">
+    <option value="black">Black</option>
+    <option value="white">White</option>
+    <option value="blue">Blue</option>
+  </select>
+  <!-- 🔢 Quantity Selector -->
+<label for="quantity">Quantity:</label>
+<div class="quantity-control">
+  <button id="decrease">−</button>
+  <input type="number" id="quantity" value="1" min="1" max="10" readonly>
+  <button id="increase">+</button>
+</div>
+
+<!-- 💰 Dynamic Total Price -->
+
+
+
+  <h2 id="product-price"></h2>
+  <p id="total-price"></p>
+  <button id="add-to-cart-btn">Add to Cart</button>
+</div>
+</div>
+
+
+
+  </section>
+
+  <!-- ✅ Footer (optional) -->
+  <footer>
+    <p style="text-align: center;">&copy; 2025 ShopMate. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ Link JS File -->
+  <script src="scripts/product.js"></script>
+</body>
+</html>

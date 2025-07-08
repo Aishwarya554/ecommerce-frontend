@@ -35,8 +35,7 @@ fetch(API_URL)
   .then(products => {
     // Save to localStorage
     localStorage.setItem("products", JSON.stringify(products));
-
-console.log("Products saved to localStorage!");
+    console.log("Products saved to localStorage!");
 
     // Only update UI if not using cache
     if (!cached) {
@@ -55,15 +54,20 @@ console.log("Products saved to localStorage!");
 // Display product cards
 function displayProducts(products) {
   grid.innerHTML = ""; // Clear previous content
+
   products.forEach(product => {
     const card = document.createElement("div");
     card.className = "product-card";
+
     card.innerHTML = `
-      <img src="${product.image}" alt="${product.title || product.name}" loading="lazy">
-      <h3>${product.title || product.name}</h3>
+      <a href="product.html?id=${product.id}" class="product-link">
+        <img src="${product.image}" alt="${product.title || product.name}" loading="lazy">
+        <h3>${product.title || product.name}</h3>
+      </a>
       <p>$${product.price}</p>
       <button>Add to Cart</button>
     `;
+
     grid.appendChild(card);
   });
 }
@@ -71,6 +75,30 @@ function displayProducts(products) {
 // Handle "Add to Cart" click
 document.addEventListener("click", function (e) {
   if (e.target && e.target.textContent === "Add to Cart") {
+    const productCard = e.target.closest(".product-card");
+    const name = productCard.querySelector("h3").textContent;
+    const price = productCard.querySelector("p").textContent;
+    const image = productCard.querySelector("img").src;
+
+    const product = { name, price, image };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateCartCount();
     alert("Item added to cart!");
   }
 });
+
+// Update cart item count in navbar
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const countSpan = document.querySelector(".cart-count");
+  if (countSpan) {
+    countSpan.textContent = cart.length;
+  }
+}
+
+// Call on page load
+updateCartCount();
