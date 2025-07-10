@@ -52,28 +52,40 @@ fetch("/products.json")
     updateTotalPrice(); // ✅ Initial total price
 
     // ✅ Add to cart with size, color, and quantity
-    document.getElementById("add-to-cart-btn").addEventListener("click", () => {
-      const selectedSize = document.getElementById("size").value;
-      const selectedColor = document.getElementById("color").value;
+   document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+  const selectedSize = document.getElementById("size").value;
+  const selectedColor = document.getElementById("color").value;
 
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      const productWithDetails = {
-        ...product,
-        selectedSize,
-        selectedColor,
-        quantity
-      };
+  const productWithDetails = {
+    ...product,
+    selectedSize,
+    selectedColor,
+    quantity
+  };
 
-      cart.push(productWithDetails);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount();
+  // Check if the product with same ID and variations already exists
+  const existingIndex = cart.findIndex(item =>
+    item.id === product.id &&
+    item.selectedSize === selectedSize &&
+    item.selectedColor === selectedColor
+  );
 
-      // ✅ Feedback
-      alert(
-        `✅ Added to cart:\n${product.name}\nSize: ${selectedSize}\nColor: ${selectedColor}\nQuantity: ${quantity}`
-      );
-    });
+  if (existingIndex !== -1) {
+    // ✅ Update quantity instead of adding duplicate
+    cart[existingIndex].quantity += quantity;
+  } else {
+    // ✅ Add new product
+    cart.push(productWithDetails);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+
+  alert(`✅ Added to cart:\n${product.name}\nSize: ${selectedSize}\nColor: ${selectedColor}\nQuantity: ${quantity}`);
+});
+
   })
   .catch((err) => {
     console.error("Error loading product:", err);

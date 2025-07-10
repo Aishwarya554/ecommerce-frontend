@@ -346,3 +346,139 @@ header {
   text-align: center;
   font-size: 1rem;
 }
+#cart-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+#cart-items-container {
+  margin-top: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.cart-details {
+  margin-left: 20px;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.qty-btn {
+  padding: 5px 10px;
+  font-size: 18px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.qty {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#total-price {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.btn,
+.checkout-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #ff5722;
+  color: white;
+}
+
+.checkout-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.checkout-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+/* ✅ Responsive Cart Design */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-details {
+    margin-left: 0;
+  }
+
+  .qty-controls {
+    justify-content: center;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn,
+  .checkout-btn {
+    width: 80%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-item img {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .qty-btn {
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+
+  #total-price {
+    font-size: 18px;
+  }
+}
