@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Signup</title>
+  <link rel="stylesheet" href="styles/style.css" />
+
+  <!-- ✅ Firebase Compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // ✅ Your Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAq5MoYHtmPr-FcN6Ht7OZ6r4ynsEgTKWw",
+      authDomain: "e-commerce-541dd.firebaseapp.com",
+      projectId: "e-commerce-541dd",
+      storageBucket: "e-commerce-541dd.appspot.com",
+      messagingSenderId: "199040529187",
+      appId: "1:199040529187:web:f8602131216ff05fce5296",
+      measurementId: "G-TH5P6FQ6QL"
+    };
+
+    // ✅ Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="toggle-buttons">
+      <button id="login-btn">Login</button>
+      <button id="signup-btn">Signup</button>
+    </div>
+
+    <!-- 🔐 Login Form -->
+    <form id="login-form" class="auth-form active">
+      <h2>Login</h2>
+      <input type="email" id="login-email" placeholder="Email" required />
+      <input type="password" id="login-password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <a href="#" style="display:block; margin-bottom:10px;">Forgot Password?</a>
+    </form>
+
+    <!-- 📝 Signup Form -->
+    <form id="signup-form" class="auth-form">
+      <h2>Signup</h2>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" id="signup-email" placeholder="Email" required />
+      <input type="password" id="signup-password" placeholder="Password" required />
+      <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <!-- 🚪 Logout -->
+    <button id="logout-btn" style="display: none;">Logout</button>
+  </div>
+
+  <!-- ✅ Your custom script -->
+  <script src="scripts/auth.js"></script>
+</body>
+</html>
