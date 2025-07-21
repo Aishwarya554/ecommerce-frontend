@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Online Shop</title>
+  <link rel="stylesheet" href="styles/main.min.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header">
+      <div class="logo">
+        <picture>
+  <source srcset="assets/logo-small.webp" media="(max-width: 480px)">
+  <source srcset="assets/logo-medium.webp" media="(max-width: 768px)">
+  <img src="assets/logo-large.webp" alt="Logo" loading="lazy">
+</picture>
+      </div>
+
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+
+        <div class="nav-actions">
+          
+          <div class="cart-link">
+            <a href="cart.html">Cart</a>
+            <div class="hamburger" id="hamburger">&#9776;</div>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero about-hero">
+    <div class="hero-content">
+      <h1>About Our Shop</h1>
+      <p>We bring trendy styles & unbeatable prices — all in one place!</p>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-section">
+    <div class="container">
+      
+      <p>
+        Welcome to Online Shop, your one-stop destination for the latest in fashion, gadgets, and lifestyle products. Founded in 2021, we've quickly grown into a trusted platform that offers a curated selection of quality items at unbeatable prices.
+      
+     Online Shop is your trusted destination for fashion, electronics, and daily essentials.
+        We combine quality with affordability, offering curated selections that suit your lifestyle.
+        Our team works tirelessly to bring you trending products, fast shipping, and unmatched support.
+        <br><br>
+        We believe shopping should be fun, simple, and satisfying — and that's exactly what we deliver.</p>
+
+      
+      <p>
+        Our mission is to make shopping easy, fun, and affordable for everyone. We partner with top brands and suppliers to deliver exceptional value and a smooth user experience.
+      </p>
+
+    
+    </div>
+  </section>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('open');
+  });
+</script>
+
+  <footer>
+    <p style="text-align: center; padding: 2rem;">&copy; 2025 Online Shop. All rights reserved.</p>
+  </footer>
+</body>
+</html>

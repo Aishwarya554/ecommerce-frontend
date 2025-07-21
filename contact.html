@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact | Online Shop</title>
+  <link rel="stylesheet" href="styles/main.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+   <header>
+    <div class="header">
+      <div class="logo">
+         <picture>
+  <source srcset="assets/logo-small.webp" media="(max-width: 480px)">
+  <source srcset="assets/logo-medium.webp" media="(max-width: 768px)">
+  <img src="assets/logo-large.webp" alt="Logo" loading="lazy">
+</picture>
+      </div>
+
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+
+        <div class="nav-actions">
+          
+          <div class="cart-link">
+            <a href="cart.html">Cart</a>
+            <div class="hamburger" id="hamburger">&#9776;</div>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact Hero Section -->
+  <section class="contact-hero">
+    <div class="contact-content">
+      <h1>Get in Touch</h1>
+      <p>We’d love to hear from you! Feel free to reach out to us with any questions or suggestions.</p>
+      <ul class="contact-info">
+        <li><strong>Email:</strong> support@onlineshop.com</li>
+        <li><strong>Phone:</strong> +91 98765 43210</li>
+        <li><strong>Address:</strong> Online Shop HQ, Bengaluru, India</li>
+      </ul>
+    </div>
+  </section>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('open');
+  });
+</script>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Online Shop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

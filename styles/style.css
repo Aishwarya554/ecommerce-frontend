@@ -51,3 +51,12 @@
     padding: 8px;
   }
 }
+@font-face {
+  font-family: 'Roboto-Italic';
+  src: url('assets/fonts/Roboto-Italic.woff2') format('woff2');
+  font-display: swap;
+}
+body {
+  font-family: 'Roboto-Italic', sans-serif;
+}
+

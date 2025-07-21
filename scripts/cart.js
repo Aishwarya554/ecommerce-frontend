@@ -2,13 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartContainer = document.getElementById("cart-items-container");
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // ✅ Convert any string prices to numbers (fixes old bad data)
+  // ✅ Sanitize prices and quantities
   cart = cart.map(item => ({
-  ...item,
-  price: parseFloat(item.price.replace(/[^0-9.]/g, "")), // fix NaN from "$49.99"
-  quantity: parseInt(item.quantity) || 1
-}));
-
+    ...item,
+    price: typeof item.price === "string"
+      ? parseFloat(item.price.replace(/[^0-9.]/g, ""))
+      : parseFloat(item.price),
+    quantity: parseInt(item.quantity) || 1
+  }));
 
   function updateCartCount() {
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -31,13 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let total = 0;
 
-cart.forEach((item, index) => {
-  const cleanPrice = parseFloat(item.price.toString().replace(/[^\d.]/g, ""));
-  const quantity = parseInt(item.quantity) || 1;
-  const itemTotal = cleanPrice * quantity;
-
-  total += itemTotal;
-
+    cart.forEach((item, index) => {
+      const price = parseFloat(item.price.toString().replace(/[^\d.]/g, ""));
+      const quantity = parseInt(item.quantity) || 1;
+      const itemTotal = price * quantity;
+      total += itemTotal;
 
       const cartItem = document.createElement("div");
       cartItem.className = "cart-item";
@@ -46,7 +45,7 @@ cart.forEach((item, index) => {
         <img src="${item.image}" alt="${item.name}" width="100" />
         <div class="cart-details">
           <h3>${item.name}</h3>
-          <p>Price: ₹${item.price.toFixed(2)}</p>
+          <p>Price: ₹${price.toFixed(2)}</p>
           <p>Option: ${item.option || "N/A"}</p>
           <div class="qty-controls">
             <button class="qty-btn decrease" data-index="${index}">−</button>
@@ -61,14 +60,11 @@ cart.forEach((item, index) => {
       cartContainer.appendChild(cartItem);
     });
 
-    // Total price
     const totalDiv = document.createElement("div");
     totalDiv.id = "total-price";
-   totalDiv.innerHTML = `<h3>Total: ₹${total.toFixed(2)}</h3>`;
-
+    totalDiv.innerHTML = `<h3>Total: ₹${total.toFixed(2)}</h3>`;
     cartContainer.appendChild(totalDiv);
 
-    // Checkout button
     const checkoutBtn = document.getElementById("checkout-btn");
     if (checkoutBtn) {
       checkoutBtn.disabled = false;
@@ -83,7 +79,7 @@ cart.forEach((item, index) => {
   // 🔁 Initial render
   renderCart();
 
-  // 🔁 Handle increase, decrease, remove
+  // 🔁 Handle quantity changes and removal
   cartContainer.addEventListener("click", (e) => {
     const index = e.target.dataset.index;
 

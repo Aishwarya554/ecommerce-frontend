@@ -1,12 +1,15 @@
 console.log("Script loaded!");
 
 // ✅ Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+let allProducts = []; // ✅ Global storage for all products
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
+ const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('open');
+  });
 
 // ✅ DOM elements
 const grid = document.getElementById("product-grid");
@@ -33,6 +36,7 @@ fetch(API_URL)
     return res.json();
   })
   .then(products => {
+      allProducts = products;
     localStorage.setItem("products", JSON.stringify(products));
     console.log("Products saved to localStorage!");
 
@@ -59,7 +63,7 @@ function displayProducts(products) {
 
     card.innerHTML = `
       <a href="product.html?id=${product.id}" class="product-link">
-        <img src="${product.image}" alt="${product.title || product.name}" loading="lazy">
+        <img data-src="${product.image}" alt="${product.title || product.name}" class="lazy-img">
         <h3>${product.title || product.name}</h3>
       </a>
       <p>$${product.price}</p>
@@ -68,6 +72,9 @@ function displayProducts(products) {
 
     grid.appendChild(card);
   });
+
+  // ✅ Trigger lazy loading after DOM update
+  initLazyLoading();
 }
 
 // ✅ Handle "Add to Cart" click
@@ -82,22 +89,20 @@ document.addEventListener("click", function (e) {
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // ✅ Check for duplicate by name and image (can adjust logic if needed)
     const existingIndex = cart.findIndex(
       (item) => item.name === product.name && item.image === product.image
     );
 
     if (existingIndex !== -1) {
-      cart[existingIndex].quantity += 1; // ✅ Update quantity
+      cart[existingIndex].quantity += 1;
     } else {
-      cart.push(product); // ✅ Add new
+      cart.push(product);
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
     updateCartCount();
 
-    // ✅ Show animated feedback (toast)
     const message = document.getElementById("cart-message");
     if (message) {
       message.classList.add("show");
@@ -114,7 +119,6 @@ function updateCartCount() {
   const countSpan = document.querySelector(".cart-count");
 
   if (countSpan) {
-    // ✅ Count total quantity of all items
     const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
     countSpan.textContent = totalItems;
   }
@@ -122,3 +126,44 @@ function updateCartCount() {
 
 // ✅ Call on page load
 updateCartCount();
+
+// ✅ JS-based Lazy Loading using IntersectionObserver
+function initLazyLoading() {
+  const lazyImages = document.querySelectorAll(".lazy-img");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove("lazy-img");
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    lazyImages.forEach(img => observer.observe(img));
+  } else {
+    // Fallback for older browsers
+    lazyImages.forEach(img => {
+      img.src = img.dataset.src;
+    });
+  }
+}
+const searchInput = document.querySelector(".search-bar");
+
+searchInput.addEventListener("input", (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+
+  const filteredProducts = allProducts.filter(product => {
+    const title = product.title || product.name || "";
+    const category = product.category || "";
+    return (
+      title.toLowerCase().includes(searchTerm) ||
+      category.toLowerCase().includes(searchTerm)
+    );
+  });
+
+  displayProducts(filteredProducts);
+});

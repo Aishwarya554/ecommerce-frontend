@@ -103,3 +103,14 @@ function updateCartCount() {
 }
 
 updateCartCount();
+// 🔍 Search Functionality
+const searchInput = document.querySelector(".search-bar");
+
+searchInput.addEventListener("input", (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const filteredProducts = allProducts.filter(product =>
+    product.name.toLowerCase().includes(searchTerm) ||
+    product.category.toLowerCase().includes(searchTerm)
+  );
+  displayProducts(filteredProducts); // This should be your product rendering function
+});

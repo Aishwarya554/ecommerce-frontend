@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Cart</title>
-  <link rel="stylesheet" href="styles/main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
   <!-- Header -->
@@ -18,23 +20,28 @@
 
   <!-- Cart Section -->
   <main>
-  <h2>Your Shopping Cart</h2>
-  <div id="cart-items-container">
-    <!-- Cart items will be displayed here -->
-  </div>
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items-container">
+      <!-- Cart items will be displayed here -->
+    </div>
 
-  <div class="action-buttons">
-    <a href="index.html" class="btn">Continue Shopping</a>
-    <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
-  </div>
-</main>
+    <div class="action-buttons">
+      <a href="index.html" class="btn">Continue Shopping</a>
+      <button id="checkout-btn" class="checkout-btn" disabled>Proceed to Checkout</button>
+    </div>
+  </main>
 
-<!-- Footer -->
-<footer>
-  <p>&copy; 2025 My E-Commerce Store</p>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 My E-Commerce Store</p>
+  </footer>
+  <!-- ✅ Firebase App (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+
+<!-- ✅ Firebase Auth (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 
 
-  <script src="scripts/cart.js"></script>
+  <script src="scripts/cart.min.js"></script>
 </body>
 </html>
