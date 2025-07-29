@@ -6,7 +6,7 @@ const productId = parseInt(params.get("id")); // e.g., ?id=0
 fetch("/products.json")
   .then(res => res.json())
   .then(products => {
-    const product = products[productId];
+    const product = products[productId]; // ✅ use array index
 
     if (!product) {
       document.querySelector(".product-info").innerHTML = "<p>Product not found.</p>";
@@ -22,8 +22,8 @@ fetch("/products.json")
     const totalPriceDisplay = document.getElementById("total-price");
 
     function updateTotalPrice() {
+      document.getElementById("product-price").textContent = `$${price.toFixed(2)}`;
       totalPriceDisplay.textContent = `Total: $${(price * quantity).toFixed(2)}`;
-      document.getElementById("product-price").textContent = `$${(price * quantity).toFixed(2)}`;
     }
 
     document.getElementById("increase").addEventListener("click", () => {
@@ -48,44 +48,45 @@ fetch("/products.json")
     document.getElementById("product-name").textContent = product.name;
     document.getElementById("product-description").textContent =
       "This is a premium, high-quality product picked just for you!";
+
     quantityInput.value = quantity;
-    updateTotalPrice(); // ✅ Initial total price
+    updateTotalPrice();
 
-    // ✅ Add to cart with size, color, and quantity
-   document.getElementById("add-to-cart-btn").addEventListener("click", () => {
-  const selectedSize = document.getElementById("size").value;
-  const selectedColor = document.getElementById("color").value;
+    // ✅ Add to cart
+    document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+      const selectedSize = document.getElementById("size").value;
+      const selectedColor = document.getElementById("color").value;
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  const productWithDetails = {
-    ...product,
-    selectedSize,
-    selectedColor,
-    quantity
-  };
+      const productWithDetails = {
+        id: productId, // use index as ID
+        name: product.name,
+        price: price,
+        image: product.image,
+        selectedSize,
+        selectedColor,
+        quantity
+      };
 
-  // Check if the product with same ID and variations already exists
-  const existingIndex = cart.findIndex(item =>
-    item.id === product.id &&
-    item.selectedSize === selectedSize &&
-    item.selectedColor === selectedColor
-  );
+      // Check if same product variation exists
+      const existingIndex = cart.findIndex(item =>
+        item.id === productId &&
+        item.selectedSize === selectedSize &&
+        item.selectedColor === selectedColor
+      );
 
-  if (existingIndex !== -1) {
-    // ✅ Update quantity instead of adding duplicate
-    cart[existingIndex].quantity += quantity;
-  } else {
-    // ✅ Add new product
-    cart.push(productWithDetails);
-  }
+      if (existingIndex !== -1) {
+        cart[existingIndex].quantity += quantity;
+      } else {
+        cart.push(productWithDetails);
+      }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
 
-  alert(`✅ Added to cart:\n${product.name}\nSize: ${selectedSize}\nColor: ${selectedColor}\nQuantity: ${quantity}`);
-});
-
+      alert(`✅ Added to cart:\n${product.name}\nSize: ${selectedSize}\nColor: ${selectedColor}\nQuantity: ${quantity}`);
+    });
   })
   .catch((err) => {
     console.error("Error loading product:", err);
@@ -103,14 +104,3 @@ function updateCartCount() {
 }
 
 updateCartCount();
-// 🔍 Search Functionality
-const searchInput = document.querySelector(".search-bar");
-
-searchInput.addEventListener("input", (e) => {
-  const searchTerm = e.target.value.toLowerCase();
-  const filteredProducts = allProducts.filter(product =>
-    product.name.toLowerCase().includes(searchTerm) ||
-    product.category.toLowerCase().includes(searchTerm)
-  );
-  displayProducts(filteredProducts); // This should be your product rendering function
-});

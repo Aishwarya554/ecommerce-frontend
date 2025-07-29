@@ -12,7 +12,14 @@
 
   <!-- ✅ Same Header as index.html -->
   <header>
-    <div class="logo">ShopMate</div>
+    <div class="logo">
+   <picture>
+  <source srcset="assets/logo-small.webp" media="(max-width: 480px)">
+  <source srcset="assets/logo-medium.webp" media="(max-width: 768px)">
+  <img src="assets/logo-large.webp" alt="Logo" loading="lazy">
+</picture>
+
+  </div>
     <nav class="navbar">
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
