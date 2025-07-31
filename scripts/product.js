@@ -3,7 +3,7 @@ const params = new URLSearchParams(window.location.search);
 const productId = parseInt(params.get("id")); // e.g., ?id=0
 
 // Fetch local JSON file
-fetch("/products.json")
+fetch("products.json")
   .then(res => res.json())
   .then(products => {
     const product = products[productId]; // ✅ use array index
